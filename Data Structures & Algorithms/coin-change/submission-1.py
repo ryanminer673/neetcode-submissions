@@ -1,0 +1,21 @@
+class Solution:
+    def coinChange(self, coins: List[int], amount: int) -> int:
+        
+        # array that store the min number of coints for amount i
+        # then we check at each new i the cost of adding 1 more coin
+
+        
+        dp = [float('inf')] * (amount + 1)
+
+        dp[0] = 0
+
+        for i in range(1, amount+1):
+
+            for coin in coins:
+                if i >= coin:
+                    dp[i] = min(dp[i], dp[i-coin] + 1)
+
+        if dp[amount] == float('inf'):
+            return -1
+        return dp[amount]
+                
